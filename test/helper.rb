@@ -20,7 +20,7 @@ def ipv6_enabled?
   require 'socket'
 
   begin
-    TCPServer.open("::1", 0)
+    TCPServer.open('::1', 0)
     true
   rescue
     false

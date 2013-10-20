@@ -6,7 +6,7 @@
 # Copyright (C) 2013 Alexander Blagoev
 
 module Fluent
-  # 
+  # Fluentd UDP input main class
   class UdpEventInput < Input
     MAX_BLOCKTIME = 2
 
@@ -17,9 +17,9 @@ module Fluent
       require 'fluent/plugin/socket_util'
     end
 
-    config_param :port, :integer, :default => 24224
-    config_param :bind, :string, :default => '0.0.0.0'
-    config_param :max_message_size, :integer, :default => 1024
+    config_param :port, :integer, default: 242_24
+    config_param :bind, :string, default: '0.0.0.0'
+    config_param :max_message_size, :integer, default: 1024
 
     def configure(conf)
       super
@@ -28,7 +28,7 @@ module Fluent
     def start
       callback = method(:receive_data)
 
-      @loop = Coolio::Loop.new :backend => :epoll
+      @loop = Coolio::Loop.new backend: :epoll
 
       $log.debug "listening udp socket on #{@bind}:#{@port}"
       @usock = SocketUtil.create_udp_socket(@bind)
@@ -41,11 +41,12 @@ module Fluent
     end
 
     def shutdown
-      #Force event every MAX_BLOCKTIME seconds to prevent 60 second timeout, see ext/libev/ev.c MAX_BLOCKTIME
+      # Force event every MAX_BLOCKTIME seconds to prevent 60 second timeout
+      # see ext/libev/ev.c MAX_BLOCKTIME
       @watcher = Cool.io::TimerWatcher.new(MAX_BLOCKTIME, true)
       @loop.attach(@watcher)
 
-      $log.debug "stopping event loop"
+      $log.debug 'stopping event loop'
       begin
         @loop.stop
       rescue RuntimeError
@@ -54,23 +55,24 @@ module Fluent
       $log.debug "closing udp socket on #{@bind}:#{@port}"
       @handler.close
 
-      $log.debug "closing watchers"
-      @loop.watchers.each {|w| w.detach }
+      $log.debug 'closing watchers'
+      @loop.watchers.each { |w| w.detach }
 
-      $log.debug "waiting for thread to finish"
+      $log.debug 'waiting for thread to finish'
       @thread.join
-      $log.debug "thread finished"
-      $log.debug "terminating"
+      $log.debug 'thread finished'
+      $log.debug 'terminating'
     end
 
     def run
       @loop.run
-    rescue
-      $log.error "unexpected error", :error => $!.to_s
+    rescue Exception => e
+      $log.error 'unexpected error', error: e.message
       $log.error_backtrace
     end
 
     protected
+
     def receive_data(data)
       if data.bytesize == @max_message_size
         $log.warn "message might be too big and truncated to #{@max_message_size}"
@@ -78,8 +80,8 @@ module Fluent
 
       begin
         parsed = JSON.parse(data)
-      rescue JSON::ParserError
-        $log.warn "invalid json data", :error => $!.to_s
+      rescue JSON::ParserError => e
+        $log.warn 'invalid json data', error: e.message
         return
       end
 
@@ -88,19 +90,21 @@ module Fluent
       record = parsed[2]
 
       if tag.nil? || time.nil? || record.nil?
-        $log.warn "invalid message supplied #{data}", :error => $!.to_s
+        $log.warn "invalid message supplied #{data}"
         return
       end
 
       time ||= Engine.now
 
       Engine.emit(tag, time, record)
-    rescue
-      $log.warn data.dump, :error => $!.to_s
+    rescue Exception => e
+      $log.warn data.dump, error: e.message
       $log.debug_backtrace
     end
 
     private
+
+    # Class to handle the UDP layer
     class UdpHandler < Coolio::IO
       def initialize(io, max_message_size, callback)
         super(io)
@@ -113,7 +117,7 @@ module Fluent
         msg, _ = @io.recvfrom_nonblock(@max_message_size)
         @callback.call(msg)
       rescue Exception => e
-        $log.error e.message, :error => $!.to_s
+        $log.error e.message, error: e.message
       end
     end
   end
