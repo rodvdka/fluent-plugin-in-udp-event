@@ -1,0 +1,31 @@
+= fluent-plugin-in-udp-event {<img src="https://travis-ci.org/ablagoev/fluent-plugin-in-udp-event.png?branch=master" />}[https://travis-ci org/ablagoev/fluent-plugin-in-udp-event]
+
+An event driven (Fluentd)[http://fluentd.org/] input plugin for sending logs through UDP. The plugin uses (Coo.io)[http://coolio.github.io/] similarly to other parts in Fluentd.
+
+The incoming max message size can be configured through the max_message_size config option. It is 1024 bytes by default, any messages larger than this will be ignored.
+
+Messages should be in JSON format, following fluentd's common message structure:
+
+	[tag, timestamp, data]
+
+== Installations:
+
+`gem install fluent-in-udp-event`
+
+== Usage:
+
+	# Configuration file fluent.conf
+    <source>
+      type udp_event
+      port 24224
+      bind 0.0.0.0
+      max_message_size 2048
+    </source>
+
+
+The plugin was heavily influenced by the (in_syslog)[https://github.com/fluent/fluentd/blob/master/lib/fluent/plugin/in_syslog.rb] plugin in fluentd.
+
+== Copyright
+
+Copyright (c) 2013 ablagoev. See LICENSE.txt for
+further details.
