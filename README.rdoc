@@ -1,4 +1,7 @@
-= fluent-plugin-in-udp-event {<img src="https://travis-ci.org/ablagoev/fluent-plugin-in-udp-event.png?branch=master" />}[https://travis-ci.org/ablagoev/fluent-plugin-in-udp-event]
+{<img src="https://badge.fury.io/rb/fluent-plugin-in-udp-event.png" alt="Gem Version" />}[http://badge.fury.io/rb/fluent-plugin-in-udp-event]
+{<img src="https://travis-ci.org/ablagoev/fluent-plugin-in-udp-event.png?branch=master" />}[https://travis-ci.org/ablagoev/fluent-plugin-in-udp-event]
+
+= fluent-plugin-in-udp-event
 
 An event driven Fluentd[http://fluentd.org/] input plugin for sending logs through UDP. The plugin uses Cool.io[http://coolio.github.io/] similarly to other parts in Fluentd.
 
