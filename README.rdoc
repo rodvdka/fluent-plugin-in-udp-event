@@ -1,4 +1,4 @@
-= fluent-plugin-in-udp-event {<img src="https://travis-ci.org/ablagoev/fluent-plugin-in-udp-event.png?branch=master" />}[https://travis-ci org/ablagoev/fluent-plugin-in-udp-event]
+= fluent-plugin-in-udp-event {<img src="https://travis-ci.org/ablagoev/fluent-plugin-in-udp-event.png?branch=master" />}[https://travis-ci.org/ablagoev/fluent-plugin-in-udp-event]
 
 An event driven (Fluentd)[http://fluentd.org/] input plugin for sending logs through UDP. The plugin uses (Coo.io)[http://coolio.github.io/] similarly to other parts in Fluentd.
 
@@ -23,7 +23,7 @@ Messages should be in JSON format, following fluentd's common message structure:
     </source>
 
 
-The plugin was heavily influenced by the (in_syslog)[https://github.com/fluent/fluentd/blob/master/lib/fluent/plugin/in_syslog.rb] plugin in fluentd.
+The plugin was heavily influenced by the in_syslog[https://github.com/fluent/fluentd/blob/master/lib/fluent/plugin/in_syslog.rb] plugin in fluentd.
 
 == Copyright
 
