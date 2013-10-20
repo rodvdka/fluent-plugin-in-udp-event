@@ -1,8 +1,11 @@
 # -*- encoding: utf-8 -*-
 
+require 'coveralls'
 require 'test/unit'
 require 'fluent/test'
 require 'fluent/plugin/in_udp_event'
+
+Coveralls.wear!
 
 unless defined?(Test::Unit::AssertionFailedError)
   class Test::Unit::AssertionFailedError < StandardError
