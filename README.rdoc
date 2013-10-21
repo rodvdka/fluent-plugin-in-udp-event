@@ -1,6 +1,7 @@
 {<img src="https://badge.fury.io/rb/fluent-plugin-in-udp-event.png" alt="Gem Version" />}[http://badge.fury.io/rb/fluent-plugin-in-udp-event]
 {<img src="https://travis-ci.org/ablagoev/fluent-plugin-in-udp-event.png?branch=master" />}[https://travis-ci.org/ablagoev/fluent-plugin-in-udp-event]
 {<img src="https://coveralls.io/repos/ablagoev/fluent-plugin-in-udp-event/badge.png?branch=master" alt="Coverage Status" />}[https://coveralls.io/r/ablagoev/fluent-plugin-in-udp-event?branch=master]
+{<img src="https://codeclimate.com/github/ablagoev/fluent-plugin-in-udp-event.png" />}[https://codeclimate.com/github/ablagoev/fluent-plugin-in-udp-event]
 
 = fluent-plugin-in-udp-event
 
