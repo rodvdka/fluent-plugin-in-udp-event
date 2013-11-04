@@ -28,7 +28,7 @@ module Fluent
     def start
       callback = method(:receive_data)
 
-      @loop = Coolio::Loop.new backend: :epoll
+      @loop = Coolio::Loop.new
 
       $log.debug "listening udp socket on #{@bind}:#{@port}"
       @usock = SocketUtil.create_udp_socket(@bind)
