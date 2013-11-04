@@ -1,5 +1,8 @@
 # -*- encoding: utf-8 -*-
 
+require 'coveralls'
+Coveralls.wear!
+
 require 'test/unit'
 require 'fluent/test'
 require 'fluent/plugin/in_udp_event'
