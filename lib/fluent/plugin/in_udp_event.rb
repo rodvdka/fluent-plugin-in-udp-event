@@ -85,9 +85,9 @@ module Fluent
         return
       end
 
-      tag = parsed[0]
-      time = parsed[1].to_i
-      record = parsed[2]
+      tag = parsed['tag']
+      time = parsed['time'].to_i
+      record = parsed['record']
 
       if tag.nil? || time.nil? || record.nil?
         $log.warn "invalid message supplied #{data}"
