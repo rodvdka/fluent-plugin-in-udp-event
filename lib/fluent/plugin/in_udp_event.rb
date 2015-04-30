@@ -81,9 +81,9 @@ module Fluent
       end
 
       begin
-        cipher = OpenSSL::AES256.new(:CFB)
-        decipher.key = @aes_key
-        parsed = JSON.parse(decipher.update(data))
+        cipher = OpenSSL::Cipher.new 'AES-256-CFB'
+        cipher.key = @aes_key
+        parsed = JSON.parse(cipher.update(data))
       rescue JSON::ParserError => e
         $log.warn 'invalid json data', error: e.message
         return
