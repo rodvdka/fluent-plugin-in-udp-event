@@ -20,7 +20,7 @@ module Fluent
     config_param :port, :integer, default: 242_24
     config_param :bind, :string, default: '0.0.0.0'
     config_param :max_message_size, :integer, default: 1024
-    config_param :aes_key :string, default: ''
+    config_param :aes_key, :string, default: ''
 
     def configure(conf)
       super
