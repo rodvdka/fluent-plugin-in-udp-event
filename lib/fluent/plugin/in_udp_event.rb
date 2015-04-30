@@ -15,6 +15,7 @@ module Fluent
     def initialize
       super
       require 'fluent/plugin/socket_util'
+      require 'openssl'
     end
 
     config_param :port, :integer, default: 242_24
